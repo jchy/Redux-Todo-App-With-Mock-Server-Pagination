@@ -10,6 +10,7 @@ const Todo = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [perPageInput, setPerPageInput] = useState(1);
+  const [perPage, setPerPage] = useState(1);
 
   const { todos } = useSelector((state) => state);
 
@@ -30,7 +31,9 @@ const Todo = () => {
     setPage(num);
   };
 
-  const perPage = perPageInput;
+  const handlePerPage = () => {
+    setPerPage(perPageInput);
+  };
 
   return (
     <div>
@@ -39,6 +42,7 @@ const Todo = () => {
         placeholder="How many content you want perPage"
         onChange={(e) => setPerPageInput(e.target.value)}
       />
+      <button onClick={handlePerPage}>SetPerpage</button>
       <TodoInput onAdd={handleAdd} />
       <TodoList allFunc={[changePageTo, perPage, page, setPage]} />
       <Pagination
