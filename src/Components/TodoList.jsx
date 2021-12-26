@@ -16,9 +16,10 @@ const TodoItem = ({ title, status, onDelete, id, onToggle }) => {
         padding: "1rem",
         gap: "1rem",
         border: "1px solid black",
-        width: "40%",
+        width: "50%",
         margin: "auto",
-        marginTop: "10px"
+        marginTop: "10px",
+        borderRadius: "20px"
       }}
     >
       <div>{title} - </div>
