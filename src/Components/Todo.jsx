@@ -1,6 +1,6 @@
 import TodoList from "./TodoList";
 import { TodoInput } from "./TodoInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../Redux/action";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
@@ -9,6 +9,9 @@ import Pagination from "./Pagination";
 const Todo = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [perPageInput, setPerPageInput] = useState(1);
+
+  const { todos } = useSelector((state) => state);
 
   const handleAdd = (text) => {
     const action = addTodo({
@@ -27,16 +30,21 @@ const Todo = () => {
     setPage(num);
   };
 
-  const perPage = 3;
+  const perPage = perPageInput;
 
   return (
     <div>
+      <input
+        type="number"
+        placeholder="How many content you want perPage"
+        onChange={(e) => setPerPageInput(e.target.value)}
+      />
       <TodoInput onAdd={handleAdd} />
       <TodoList allFunc={[changePageTo, perPage, page, setPage]} />
       <Pagination
         currentPage={page}
         onClickCallback={(page) => changePageTo(page)}
-        total={5}
+        total={Math.ceil(todos.length / perPage)}
       />
     </div>
   );
