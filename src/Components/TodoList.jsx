@@ -30,11 +30,11 @@ const TodoItem = ({ title, status, onDelete, id, onToggle }) => {
   );
 };
 
-const TodoList = () => {
-  const { todos, isLoading, isError } = useSelector(
-    (state) => state,
-    shallowEqual
-  );
+const TodoList = ({ allFunc }) => {
+  const [changePageTo, perPage, page, setPage] = allFunc;
+
+  const { isLoading, isError } = useSelector((state) => state, shallowEqual);
+  let { todos } = useSelector((state) => state, shallowEqual);
 
   const dispatch = useDispatch();
 
@@ -69,6 +69,10 @@ const TodoList = () => {
     const action = toggleTodo(id);
     dispatch(action);
   };
+
+  todos = todos.filter(
+    (_, i) => i >= (page - 1) * perPage && i < page * perPage
+  );
 
   return (
     <div>

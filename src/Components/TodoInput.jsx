@@ -11,14 +11,13 @@ export const TodoInput = ({ onAdd }) => {
         onChange={(e) => setState(e.target.value)}
         placeholder="add something"
       />
-      <button
+      <input
+        type="submit"
         onClick={() => {
           onAdd(state);
           setState("");
         }}
-      >
-        ADD
-      </button>
+      />
     </div>
   );
 };
