@@ -1,2 +1,2 @@
-# Redux-Todo-App-With-Mock-Server-Pagination
+# Basic-redux-todo-APP
 Created with CodeSandbox
